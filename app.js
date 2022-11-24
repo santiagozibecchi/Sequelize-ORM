@@ -14,6 +14,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/posts", require("./routes/posts"));
+app.use("/api/users", require("./routes/users"));
 
 // Arrancamos en servidor
 app.listen(PORT, () => {
@@ -21,7 +22,7 @@ app.listen(PORT, () => {
 
    // Coneccion a la base de datos
    sequelize
-      .sync({ force: false })
+      .sync({ force: true })
       .then(() => {
          console.log("Conectado a la base de datos");
       })
