@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const sequelize = require("./database/db");
+require("./database/asociations");
 
 // Middlewares
 app.use(express.json());
@@ -15,6 +16,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/posts", require("./routes/posts"));
 app.use("/api/users", require("./routes/users"));
+app.use("/api/addresses", require("./routes/addresses"));
 
 // Arrancamos en servidor
 app.listen(PORT, () => {
@@ -22,7 +24,7 @@ app.listen(PORT, () => {
 
    // Coneccion a la base de datos
    sequelize
-      .sync({ force: true })
+      .sync({ force: false })
       .then(() => {
          console.log("Conectado a la base de datos");
       })
