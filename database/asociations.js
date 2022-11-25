@@ -9,3 +9,10 @@ User.hasOne(Address, { as: "domicilio", foreignKey: "residente_id" });
 
 // Añade una clave UserId a la tabla address
 Address.belongsTo(User, { as: "residente", foreignKey: "residente_id" });
+
+// * Uno a muchos
+// Los usuarios pueden tener muchas publicaciones
+// Se añade una clave userId a la tabla posts
+User.hasMany(Post, { as: "publicaciones", foreignKey: "autorId" });
+// Se añade una clave userId a la tabla posts
+Post.belongsTo(User, { as: "autor", foreignKey: "autorId" });

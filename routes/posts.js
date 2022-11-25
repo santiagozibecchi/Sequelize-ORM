@@ -1,11 +1,19 @@
 const express = require("express");
 const router = express.Router();
 const Post = require("../database/models/Post");
+const User = require("../database/models/User");
 
 // INDEX
 router.get("/", async (req, res) => {
    try {
-      const post = await Post.findAll();
+      const post = await Post.findAll({
+         include: {
+            model: User,
+            as: "autor",
+            attributes: ["name"],
+         },
+         attributes: ["title", "body"],
+      });
 
       res.json(post);
    } catch (error) {
